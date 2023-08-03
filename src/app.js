@@ -8,13 +8,13 @@ const PORT = 8080;
 app.engine("handlebars", handlebars.engine())
 app.set("views", __dirname + "/views")
 app.set("view engine", "handlebars")
-app.use(express.static(__dirname, "public"))
+app.use(express.static(__dirname + "/public"))
 //Array de usuarios
 
 app.get("/", (req, res) => {
     let testUser = {
-        nombre: "Coder",
-        apellido: "House"
+        nombre: "Lautaro",
+        apellido: "Nuñez"
     }
     res.render("index", testUser)
 })
