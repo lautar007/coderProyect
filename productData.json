@@ -1,0 +1,15 @@
+[
+  {
+    "id": 1,
+    "title": "Las cosas que perdimos en el fuego",
+    "description": "antología de cuentos de terror de la escritora argentina Mariana Enriquez",
+    "code": "AAA-001",
+    "price": 5000,
+    "status": 200,
+    "stock": 200,
+    "category": "Literatura Latinoamericana",
+    "thumbnails": [
+      "miImagen.jpg"
+    ]
+  }
+]
