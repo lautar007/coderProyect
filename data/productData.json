@@ -1,18 +1,5 @@
 [
   {
-    "id": 1,
-    "title": "Las cosas que perdimos en el fuego",
-    "description": "antología de cuentos de terror de la escritora argentina Mariana Enriquez",
-    "code": "AAA-001",
-    "price": 5000,
-    "status": 200,
-    "stock": 200,
-    "category": "Literatura Latinoamericana",
-    "thumbnails": [
-      "miImagen.jpg"
-    ]
-  },
-  {
     "id": 2,
     "title": "Las cosas que perdimos en el fuego",
     "description": "antología de cuentos de terror de la escritora argentina Mariana Enriquez",
@@ -40,9 +27,9 @@
   },
   {
     "id": 4,
-    "title": "IT parte 1",
-    "description": "Película de terror psicológico basada en la época de los 80",
-    "code": "AAA-002",
+    "title": "IT parte 1: el origen de todo",
+    "description": "Película de terror sobre un payaso loco",
+    "code": "AAA-003",
     "price": 5000,
     "status": 200,
     "stock": 200,
@@ -55,7 +42,20 @@
     "id": 5,
     "title": "IT parte 2",
     "description": "Película de terror psicológico basada en la época de los 80",
-    "code": "AAA-003",
+    "code": "AAA-004",
+    "price": 5000,
+    "status": 200,
+    "stock": 200,
+    "category": "Cine Argentino",
+    "thumbnails": [
+      "miImagen.jpg"
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Las cosas que perdimos en el fuego",
+    "description": "Antología de cuentos de terror de la escritora argentina Mariana Enriquez",
+    "code": "AAA-000",
     "price": 5000,
     "status": 200,
     "stock": 200,

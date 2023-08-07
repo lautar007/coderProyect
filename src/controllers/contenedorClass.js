@@ -1,3 +1,5 @@
+const { log } = require('console');
+
 const fs = require('fs').promises
 
 
@@ -73,17 +75,55 @@ class Contenedor {
         }
     }
 
+    async putById (id, title, description, code, price, status, stock, category, thumbnails){
+        try{
+            //Obtenemos el array con los objetos
+            let objects = await this.getAll()
+
+            
+            //filtramos el producto por el id:
+            const foundById = objects.find((obj)=> obj.id === id)
+            
+            //Verificación de código único. 
+            if((objects.some((e)=> e.code === code)) && foundById.code !== code){
+                return 'El código del producto ya existe en la base de datos. Coloque uno diferente.'
+            }
+            //Realizamos las moficiaciones si existieran:
+            title ? foundById.title = title : foundById.title 
+            description ? foundById.description = description : foundById.description 
+            code ? foundById.code = code : foundById.code 
+            price ? foundById.price = price : foundById.price 
+            status ? foundById.status = status : foundById.status 
+            stock ? foundById.stock = stock : foundById.stock 
+            category ? foundById.category = category : foundById.category 
+            thumbnails ? foundById.thumbnails = thumbnails : foundById.thumbnails 
+
+            console.log(foundById)
+            //Salvamos la nueva lista de productos:
+            await this.saveObjects(objects)
+            return 'Se ha modificado el siguiente producto: \n' + foundById.title 
+        }
+        catch (error){
+            return error
+        }
+    }
+
     async deleteById(id_obj) {
         try {
             //Obtenemos el array con los objetos
             let objects = await this.getAll()
+            //Verificamos que exista un producto con tal ID:
+            const noneCode = objects.some((e)=> e.id === id_obj)
+            if(!noneCode){
+                return 'No existe un producto con el ID especificado.'
+            }
             //Modificamos el array original eliminando el objeto indicado por parámetro.
             objects = objects.filter((obj) => obj.id !== id_obj)
             //Actualizamos el array en el archivo
             await this.saveObjects(objects)
-
+            return 'Se ha eliminado el objeto: \n' + 'id: ' + id_obj
         } catch (error) {
-            throw new Error("Error al eliminar el objeto.", error)
+            return "Error al eliminar el objeto."
         }
     }
 
