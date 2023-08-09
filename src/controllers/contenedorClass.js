@@ -57,7 +57,7 @@ class Contenedor {
             const objects = await this.getAll()
             //Buscamos el objeto cuyo ID coincida con el ID recibido por parámetro.
             const foundById = objects.find((obj)=> obj.id === id_obj)
-            return foundById || null
+            return foundById || 'No existe un producto con el ID indicado'
 
         } catch (error) {
             throw new Error("Error al obtener objeto por Id.")
@@ -140,6 +140,89 @@ class Contenedor {
         try {
             await fs.writeFile(this.direction + '/productData.json', JSON.stringify(objects, null, 2))
         } catch (error) {
+            return error
+        }
+    }
+
+
+    //---------------------METODOS DE CART------------------------------------------------------
+
+    async getAllCart() {
+        try {
+            //Obtenemos la información del archivo pasado por parámetro al constructor
+            const data = await fs.readFile(this.direction + '/cartData.json', "utf-8")
+            return data ? JSON.parse(data) : []
+
+        } catch (error) {
+            return []
+        }
+    }
+
+    async postCart(){
+        try{
+            //Obtengo array con los carritos
+          const carts = await this.getAllCart()
+          console.log(carts)
+        //Obtengo Id del último objeto
+          const lastId = carts.length > 0 ? carts[carts.length-1].id : 0
+        //Creamos el ID al nuevo objeto en base al último.
+          const newId = lastId + 1
+        //Configuro la estructura del nuevo carrito
+            const newCart = {
+                id: newId,
+                products: []
+            }
+            carts.push(newCart);
+            await fs.writeFile(this.direction + '/cartData.json', JSON.stringify(carts, null, 2))
+            return 'Se ha agregado con éxito el carrito con el ID numero: ' + newId
+        }catch(error){
+            return error
+        }
+    }
+
+    async postProductToCart(cid, pid){
+        try {
+            //Valido si existe el carrito o el producto:
+            let products = await this.getAll();
+            let carts = await this.getAllCart();
+            let verifProduct = products.some((e)=> e.id === pid);
+            console.log(carts)
+            let verifCart = carts.some((e)=> e.id === cid);
+            if(!verifProduct || !verifCart){
+                return 'El producto o el carrito con el ID indicado no existe. Pruebe con otros valores.'
+            }
+            //traigo el carrito en cuestión: 
+            let cart = carts.find((e)=> e.id === cid);
+            //Si el carrito ya tiene el producto, le sumo la propiedad quantity:
+            if(cart.products.some((e)=> e.id === pid)){
+                let product = cart.products.find((e)=> e.id === pid)
+                product.quantity ++
+                await fs.writeFile(this.direction + '/cartData.json', JSON.stringify(carts, null, 2))
+                return 'El carrito sumó una unidad más del producto con el ID: ' + pid;
+            } else{
+                //Si no, lo agrego:
+                cart.products.push({
+                    id: pid,
+                    quantity: 1
+                })
+                await fs.writeFile(this.direction + '/cartData.json', JSON.stringify(carts, null, 2))
+                return 'El carrito sumó a la lista el producto con el ID: ' + pid;
+            }
+        
+        } catch (error) {
+            console.log('Hubo un error');
+            return error
+        }
+    }
+
+    async productsCartById(id){
+        try {
+            let carts = await this.getAllCart();
+            let cart = carts.find((e)=> e.id === id);
+            if(!cart){
+                return 'No existe ningún carrito con el ID especificado.'
+            } else return cart.products
+        } catch (error){
             return error
         }
     }

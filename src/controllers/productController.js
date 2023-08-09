@@ -3,19 +3,21 @@ const direction = require('../../data/direction')
 const conteiner = new Contenedor(direction);
 
 const productController = {
-    list: (req, res) =>{
-        console.log(req.query)
-        const limit = req.query.limit
+    list: async (req, res) =>{
+        const products = await conteiner.getAll()
+        const {limit} = req.query
+        let limitList = products.slice(0, limit)
         if(limit){
-            res.send('Aquí se muestra hasta un límite de ' + limit + ' productos.')
+            res.send(limitList)
+        } else{
+            res.send(products) 
         }
-        res.send('Aquí se muestra la lista de productos')
     },
 
-    byID: (req, res) =>{
+    byID: async(req, res) =>{
         const id = parseInt(req.params.id);
-        console.log(id);
-        res.send('Aquí se muestra el producto con el ID: ' + id)
+        let product = await conteiner.getById(id)
+        res.send(product);
     },
 
     post: async(req, res)=> {

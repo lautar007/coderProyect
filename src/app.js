@@ -14,8 +14,10 @@ app.use(express.json());
 //Array de usuarios
 
 const productRouter = require('./routes/productRoute');
+const cartRouter = require('./routes/cartRouter');
 
 app.use('/api/products', productRouter)
+app.use('/api/carts', cartRouter);
 
 app.get("/", (req, res) => {
     let testUser = {
