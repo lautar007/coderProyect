@@ -9,7 +9,7 @@
     "stock": 200,
     "category": "Literatura Latinoamericana",
     "thumbnails": [
-      "miImagen.jpg"
+      "https://i.pinimg.com/564x/79/f4/d8/79f4d8d8fa9ef0224acfa19d135f3773.jpg"
     ]
   },
   {
@@ -22,12 +22,12 @@
     "stock": 200,
     "category": "Cine Argentino",
     "thumbnails": [
-      "miImagen.jpg"
+      "https://i.pinimg.com/564x/3d/cb/29/3dcb29454eed894193402fc5f373e0c7.jpg"
     ]
   },
   {
     "id": 4,
-    "title": "IT parte 1: el origen de todo",
+    "title": "IT Capítulo 1",
     "description": "Película de terror sobre un payaso loco",
     "code": "AAA-003",
     "price": 5000,
@@ -35,12 +35,12 @@
     "stock": 200,
     "category": "Cine Argentino",
     "thumbnails": [
-      "miImagen.jpg"
+      "https://i.pinimg.com/564x/0a/37/c1/0a37c14622e169a3eb0b4c1fdb13dee6.jpg"
     ]
   },
   {
     "id": 5,
-    "title": "IT parte 2",
+    "title": "IT Capítulo 2",
     "description": "Película de terror psicológico basada en la época de los 80",
     "code": "AAA-004",
     "price": 5000,
@@ -48,20 +48,46 @@
     "stock": 200,
     "category": "Cine Argentino",
     "thumbnails": [
-      "miImagen.jpg"
+      "https://i.pinimg.com/564x/31/ec/e3/31ece332042a30691d58428257b1291e.jpg"
     ]
   },
   {
-    "id": 6,
-    "title": "Las cosas que perdimos en el fuego",
-    "description": "Antología de cuentos de terror de la escritora argentina Mariana Enriquez",
-    "code": "AAA-000",
-    "price": 5000,
-    "status": 200,
+    "id": 7,
+    "title": "Harry Potter y la piedra filosofal",
+    "description": "Una historia sobre un niño huérfano que descubre que es mago",
+    "code": "AAA-005",
+    "price": 400,
+    "status": true,
     "stock": 200,
-    "category": "Cine Argentino",
+    "category": "Literatura fantástica",
     "thumbnails": [
-      "miImagen.jpg"
+      "https://i.pinimg.com/564x/4e/c5/cd/4ec5cdc563f35abe81bd8f7e57d492a1.jpg"
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Enter the Void",
+    "description": "Película de Gaspar Noé",
+    "code": "AAA-011",
+    "price": "2500",
+    "status": true,
+    "stock": "300",
+    "category": "Cine de autor",
+    "thumbnails": [
+      "https://i.pinimg.com/564x/2d/ad/fc/2dadfc01c94428212a869dd52a89b9c6.jpg"
+    ]
+  },
+  {
+    "id": 14,
+    "title": "Un mundo feliz",
+    "description": "Libro de ciencia ficción de Aldous Huxley",
+    "code": "AAA-013",
+    "price": "1000",
+    "status": true,
+    "stock": "300",
+    "category": "Novela de ciencia ficción",
+    "thumbnails": [
+      "https://i.pinimg.com/236x/3e/9d/cc/3e9dcc13c92a815182e6864ffc3a10cd.jpg"
     ]
   }
 ]

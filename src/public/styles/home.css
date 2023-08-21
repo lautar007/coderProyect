@@ -1,0 +1,47 @@
+#homeTitle{
+    color: rgb(121, 0, 0);
+}
+
+.productList{
+    display:grid; 
+    grid-template-columns: 30% 30% 30%;
+    justify-content: space-around;
+}
+
+.productCard{
+    background-color: lightgreen;
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+.productCard img{
+    width: 10vw;
+    height: 15vw;
+    margin: 0 auto;
+}
+
+.formulario{
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+  }
+  
+  .formulario button{
+    width: 10vw;
+    margin-top: 10px;
+  }
+
+.listaActualizada {
+    border-collapse: collapse; /* Combina los bordes de las celdas adyacentes */
+    width: 100%;
+    border: 2px solid black; /* Agrega un borde a la tabla */
+}
+
+.listaActualizada th, .listaActualizada td {
+    border: 1px solid black; /* Agrega un borde a las celdas de encabezado y de datos */
+    padding: 8px; /* Agrega espacio interno para mejorar el aspecto */
+}

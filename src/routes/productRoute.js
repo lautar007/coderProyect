@@ -13,4 +13,9 @@ router.put('/', productController.put);
 //Para eliminar un producto por ID:
 router.delete('/:id', productController.deleteById)
 
+router.get('/productDetail/:id', (req, res) => {
+    const {id} = req.params
+    res.send('Aquí se imprime la vista de detalle del producto con el ID: ' + id)
+})
+
 module.exports = router;

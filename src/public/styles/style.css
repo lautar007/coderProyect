@@ -1,0 +1,16 @@
+h1{
+    font-family: 'Courier New', Courier, monospace;
+    color:red;
+}
+
+p{
+    margin: 0;
+}
+
+.results{
+  border:  solid grey thin;
+  margin-top: 2vh;
+  min-height: 10vh;
+  height: fit-content;
+}
+

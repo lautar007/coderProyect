@@ -21,9 +21,15 @@ const productController = {
     },
 
     post: async(req, res)=> {
-        const {title, description, code, price, status, stock, category, thumbnails} = req.body
-        const saveProduct = await conteiner.save(title, description, code, price, status, stock, category, thumbnails)
-        res.send(saveProduct)
+        let {title, description, code, price, status, stock, category, thumbnail} = req.body
+        !status? status = true : status;
+        thumbnail ? thumbnail = [thumbnail] : thumbnail;
+        const saveProduct = await conteiner.save(title, description, code, price, status, stock, category, thumbnail)
+        console.log(saveProduct);
+        if(typeof saveProduct === 'string' && saveProduct[0] !== 'S'){
+            res.status(200).send(saveProduct);
+        }
+        res.status(200).redirect('/realTimeProducts');
     },
 
     put: async(req, res) =>{

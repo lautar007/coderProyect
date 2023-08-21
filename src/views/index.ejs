@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Digital House Class</title>
+    </head>
+
+    <body>
+        <% const ids = [1,2,3,4,5]%>
+        <h2>En la clase de hoy veremos el famosísimo CRUD</h2>
+        <h1>Bienvenidos!!</h1>
+        <hr>
+        <h3>Algunas preguntas que nos servirán como disparador:</h3>
+        <ul>
+            <li>¿Qué significa CRUD?</li>
+            <li>¿Cuáles son las principales peticiones y para que se usan?</li>
+            <li>¿Qué es Postman y para qué sirve?</li>
+        </ul>
+        <% ids.map( (el) => {%>
+        <a href= "/api/products/productDetail/<%= el %>">
+            <li>Ir al detalle del producto <%= el %></li>
+        </a>
+        <% })%>
+        <h2>VAMOS A PROBARLO!!!!</h2>
+    </body>
+</html>

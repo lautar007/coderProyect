@@ -1,6 +1,6 @@
 const { log } = require('console');
 
-const fs = require('fs').promises
+const fs = require('fs');
 
 
 class Contenedor {
@@ -12,7 +12,6 @@ class Contenedor {
         try {
         //Obtengo array con los objetos
           const objects = await this.getAll()
-          console.log(objects)
         //Obtengo Id del último objeto
           const lastId = objects.length > 0 ? objects[objects.length-1].id : 0
         //Creamos el ID al nuevo objeto en base al último.
@@ -38,9 +37,9 @@ class Contenedor {
             category,
             thumbnails
         }
+        console.log(newObj)
         //Sumamos el nuevo objeto al array
           objects.push(newObj)
-          console.log(objects);
         //Lo guardamos en el archivo
           await this.saveObjects(objects)
         //Retornamos el nuevo ID creado
@@ -64,10 +63,10 @@ class Contenedor {
         }
     }
 
-    async getAll() {
+    getAll() {
         try {
             //Obtenemos la información del archivo pasado por parámetro al constructor
-            const data = await fs.readFile(this.direction + '/productData.json', "utf-8")
+            const data = fs.readFileSync(this.direction + '/productData.json', "utf-8")
             return data ? JSON.parse(data) : []
 
         } catch (error) {
@@ -98,7 +97,6 @@ class Contenedor {
             category ? foundById.category = category : foundById.category 
             thumbnails ? foundById.thumbnails = thumbnails : foundById.thumbnails 
 
-            console.log(foundById)
             //Salvamos la nueva lista de productos:
             await this.saveObjects(objects)
             return 'Se ha modificado el siguiente producto: \n' + foundById.title 
@@ -136,9 +134,9 @@ class Contenedor {
         }
     }
 
-    async saveObjects(objects) {
+     saveObjects(objects) {
         try {
-            await fs.writeFile(this.direction + '/productData.json', JSON.stringify(objects, null, 2))
+             fs.writeFileSync(this.direction + '/productData.json', JSON.stringify(objects, null, 2))
         } catch (error) {
             return error
         }
@@ -162,7 +160,6 @@ class Contenedor {
         try{
             //Obtengo array con los carritos
           const carts = await this.getAllCart()
-          console.log(carts)
         //Obtengo Id del último objeto
           const lastId = carts.length > 0 ? carts[carts.length-1].id : 0
         //Creamos el ID al nuevo objeto en base al último.
@@ -186,7 +183,6 @@ class Contenedor {
             let products = await this.getAll();
             let carts = await this.getAllCart();
             let verifProduct = products.some((e)=> e.id === pid);
-            console.log(carts)
             let verifCart = carts.some((e)=> e.id === cid);
             if(!verifProduct || !verifCart){
                 return 'El producto o el carrito con el ID indicado no existe. Pruebe con otros valores.'

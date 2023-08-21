@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lista de productos en tiempo real</title>
+        <link rel="stylesheet" href="/styles/home.css"> 
+        <script src="/socket.io/socket.io.js"></script>
+    </head>
+    <body>
+        <h2>Formulario para crear un producto:</h2>
+        <form class="formulario" action="/api/products" method="POST">
+            <label>Título</label>
+            <input 
+            type="text"
+            name="title"
+            placeholder="Coloque el título del producto"
+            />
+            <label>Descripción</label>
+            <textarea
+            placeholder="Coloque una descripción"
+            name="description"
+            ></textarea>
+            <label>Código de producto</label>
+            <input 
+            type="text"
+            name="code"
+            placeholder="Coloque un código con formato AAA-000. Recuerde que debe ser único"
+            />
+            <label>Precio</label>
+            <input 
+            type="text"
+            name="price"
+            placeholder="Coloque el precio del producto"
+            />
+            <label>Stock</label>
+            <input 
+            type="text"
+            name="stock"
+            placeholder="Coloque el cantidad del producto"
+            />
+            <label>Categoría</label>
+            <input 
+            type="text"
+            name="category"
+            placeholder="Coloque la categoría del producto"
+            />
+            <label>Portada</label>
+            <input 
+            type="text"
+            name="thumbnail"
+            placeholder="Coloque la URL de la portada del producto"
+            />
+            <button type="submit">Enviar</button>
+        </form>
+        <h2>Lista de productos en tiempo real:</h2>
+        <table class="listaActualizada">
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Descripción</th>
+                <th>Código</th>
+                <th>Precio</th>
+                <th>Acciones</th>
+            </tr>
+            <% list.map( (el) =>{ %>
+                <tr>
+                    <td><%= el.id %></td>
+                    <td><%= el.title %></td>
+                    <td><%= el.description %></td>
+                    <td><%= el.code %></td>
+                    <td>$<%= el.price %></td>
+                    <td><button class="eliminarBtn" value="<%= el.id%>">Eliminar</button></td>
+                </tr>
+            <% })%>
+        </table>
+    </body>
+    <script src="/scripts/realTimeProducts.js"></script>
+</html>
