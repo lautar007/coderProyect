@@ -1,0 +1,127 @@
+Para poder trabajar con Mongo DB debemos entrar a powershell: C:/program files/MongoDB/Server/7.0/bin 
+Una vez que estamos en esa dirección dentro de powershell ejecutamos el sieguiente comando:
+'md \data'
+Esto crea una nueva carpeta llamada 'data'
+Seguidamente ejecutamos lo siguiente:
+'md \data\db'
+
+Vamos al buscador de windows y escribimos 'editar variables de entorno'. Nos aparece una ventana de configuraciones. Dentro de la pestaña 'Opciones avanzadas' vamos a clickear el botón inferior que dice 'Variables de entorno...' Se abrirá una ventana en cuyo sector inferior habrá una lista de variables en la que buscaremos la que dice 'path', la seleccionaremos y apretaremos el botón que dice 'Editar...' Una vez ahí seleccionamos 'Nuevo' y copiamos la ruta de la carpeta bin: 
+C:\Program Files\MongoDB\Server\7.0\bin
+Le damos en 'Aceptar'. 
+
+Todo eso al parecer era para que pudieramos ejecutar mongod desde la terminal, pero fue al pedo, porque en la carpeta bin está la aplicación mongod que si la hacemos click ya se habre el CLI.
+Es importante recalcar que una vez que se ejecuta mongod va a aparecer una serie de códigos en una terminal que debemos dejar corriendo, pues es el servidor de mongo. Para cortar la ejecución: ctrl + C
+
+Una vez que tenemos levantado el servidor de mongo, vamos al compass y le damos al botón de conectar. Esto despliega una nueva pantalla, en la cual, en la parte inferior hay una barra oscura. Al clickear en ella desplegaremos la terminal de compass. Y allí podemos empezar con la creación de nuestra base de datos. 
+
+La base de datos que vamos a crear se debe llamar 'ecommerce' y debemos crear las siguientes colecciones: 
+-products
+-users
+
+Algunos comandos que podemos ejecutar en la terminal de compass: 
+
+-show dbs: muestra las DBs que estan guardadas en mongo. Por defecto tendríamos que tener tres: admin, config y local.
+-use miPrimeraBase: crea una nueva DB si no existe y en caso de existir se posiciona en la DB escogida. En un primer momento no va a aparecer en los gráficos.
+-db.createCollection('nombre de la colección'): Crea una nueva colección en la DB. Para ejemplificar, el nombre de la colección va a ser 'Users'.
+-db.Users.insertOne({nombre: "Lautaro", apellido: "Nuñez"}): Aquí estamos agregando un nuevo dato a la colección. Nótese que la sintaxis es muy parecida a la de JS, estamos pasando como argumento de un método, un objeto que representa ese dato. 
+-db.Users.find(): Sin argumentos nos trae todos los datos de esa colección. Podemos colocarle argumentos para filtrar los resultados según algún parámetro.
+-db.Users.insertMany([{registro 1}, {registro 2}, ...]) Lo bueno es que cada registro puede ser completamente diferente del resto. Es decir, en una misma colección yo puedo tener objetos con propiedades diferentes sin ningún problema.
+db.collection.drop(): Elimina la colección de la base de datos posicionada.
+db.dropDatabase(): Elimina la base de datos actual.
+
+-----> Comandos de filtrado de datos:
+db.collection.findOne({name: "Cosme"}): Busca un elemento que cumpla con los criterios de búsqueda (opt), devuelve el primer documento que cumpla con dicho criterio.
+db.collection.find(opt):Devuelve todos los documentos que cumplan con dicho criterio. 
+db.collection.find(opt).pretty(): Añadido para hacer más presentables los resultados de un find().
+
+----> Fitros más complejos: 
+db.Users.find({key: {$operator: val}}) -> esta es la sintaxis utilizada para los filtrados más complejos.
+Los operadores pueden ser: 
+$and : Realiza operación AND -> sintaxis: {$and: [ {},{} ] }
+$or : Realiza operación OR -> sintaxis: {$or: [ {},{} ] }
+$lt : Coincide con valores que son menores que un valor especificado.
+$lte : Coincide con valores menores o iguales a un valor especificado.
+$gt : Coincide con valores mayores a un valor especificado.
+$gte : Coincide con valores mayores o iguales a un valor especificado.
+$ne : Coincide con valores que no son iguales a un valor especificado.
+$eq : Selecciona los documentos que son iguales a un valor especificado.
+exists : Selecciona los documentos según la existencia de un campo.
+$in : Selecciona los documentos especificados en un array. 
+sintaxis: {key:{$in: [array of values] } }
+$nin : Coincide con ninguno de los valores especificados en un array.
+$size : Coincide con el número de elementos especificados.
+$all : Coincide con todos los valores definidos dentro de un array.
+$elemMatch : Coincide con algún valor definido dentro del query.
+
+----> Conteo de datos:
+db.collection.estimatedDocumentCount() Cuenta el estimado más próximo  al número de documentos según su metadata.
+db.collection.countDocuments(opt) Cuenta los documentos que cumplan con el criterio definido en las opciones (opt).
+
+PROYECCIONES:
+En ocasiones no necesitamos toda la información de un documento. Si tenemos un documento con 100 propiedades, podemos definir sólo las propiedades que queremos obtener. 
+
+Una proyección se incluye al momento de hacer una búsqueda, (siempre como segundo argumento) y es el equivalente a decirle a la base de datos: “sólo necesito ésto”
+
+Así, podríamos decir db.users.find({},{name:1}); Lo cual indica que, el campo “name” es el único que necesitamos obtener por parte del documento, ahorrándonos espacio y complejidad en el resultado.
+
+SKIP Y LIMIT:
+Skip: Omite el número de documentos indicados: Podemos usarlo cuando hagamos paginaciones, cuando necesitemos ignorar un valor que sabemos que es innecesario, etc.
+Su sintaxis es: .skip(offset)
+Limit: Limita el número de documentos devueltos. De manera que podamos hacer diferentes niveles de paginación (Tu página puede devolver 5 elementos por página, o bien 100, tú decides). 
+Su sintaxis es: .limit(num) 
+
+DISTINTAS FORMAS DE CLIENTES EN MONGO: 
+Hasta ahora solo trabajamos con dos tipos de clientes en mongo: por medio de CLI (terminal de comandos) y de GUI (interfaz gráfica). 
+Pero también existe el cliente a nivel APP, es decir, la configuración de mongo en una aplicación. 
+Y por último el cliente WEB, cuando deployamos nuestra aplicación, sitio o proyecto, podemos guardar la DB de mongo en la nube y trabajar con ella desde cualquier computadora. El cliente web por exelencia para MongoDB es Atlas, además de fungir como DBaaS.
+
+DBaaS: DATABASE AS A SERVICE.
+Siempre pensando en la escalabilidad, vemos que en aplicaciones con muchísima cantidad de información se nos hace dificil guardar todo eso. Por lo tanto deberíamos comprar infraestructura física para guardar la información o "rentar" ese espacio a un proveedor para solo preocuparnos en los aspectos superficiales de la DB. 
+
+La solución es DBaaS.
+Utilizar una base de datos como servicio, implica el poder hacer uso de una base de datos, sin preocuparse en tener que gestionar todo el aspecto físico que éste implica, es decir, podemos rentar espacios para poder alojar la información de nuestra base de datos. 
+
+Todos los aspectos físicos, de mantenimiento y seguridad de dichas bases de datos, vienen gestionados por el proveedor de dicho servicio.
+
+Amazon, Google, Microsoft, Mongo Atlas son algunos ejemplos.
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+-------------------------------CONECCIÓN MONGOOSE CON PROYECTO NODE.JS--------------------------------
+
+El primer paso para conectar mongoose con un proyecto de node.js será instalarlo con npm i:
+
+    npm i mongoose
+
+Mongoose es una librería que nos permite utilizar MongoDB a través del código del proyecto. Sería como Sequelize para SQL. 
+Una vez que lo tenemos instalado, ya deberíamos tener el sistema de ruteo con un CRUD correspondiente que cuente con una persistencia de datos basados en archivos JSON. 
+Crearemos una carpeta llamada 'models' para poder establecer los diferentes esquemas de los modelos, uno por entidad. Las entidades son tipos de objetos importantes para el proyecto como pueden ser: usuarios, productos, carritos, administradores, alumnos, servicios, cursos, etc. etc. 
+Dentro de esta carpeta configuraremos un archivo js para cada modelo. Lo ejemplificamos con modelo para productos: product.models.js
+
+El eschema es una nueva instancia de la clase schema de mongoose que recibe como argumento un objeto en el que definimos las propiedades a recibir, el tipo de dato que acepta y sus constrains (restricciones).
+
+Los tipos de datos que acepta mongoose son los siguientes:
+
+    String: Para representar cadenas de texto.
+    Number: Para representar números, ya sean enteros o de punto flotante.
+    Date: Para almacenar fechas y horarios.
+    Boolean: Para representar valores verdaderos o falsos.
+    Buffer: Para almacenar datos binarios.
+    Array: Para almacenar listas o matrices de datos.
+    ObjectId: Para representar identificadores únicos de documentos en MongoDB. También se usa para definir relaciones entre documentos.
+    Mixed: Un tipo flexible que permite almacenar cualquier tipo de datos, lo que puede ser útil para estructuras de datos cambiantes o no definidas.
+    Decimal128: Para almacenar números de punto flotante de alta precisión.
+    Map: Para almacenar pares clave-valor donde las claves son cadenas y los valores pueden ser de cualquier tipo admitido por Mongoose.
+    Schema.Types: Mongoose también proporciona tipos especializados como Schema.Types.ObjectId, Schema.Types.Array, Schema.Types.Map, etc., que puedes utilizar directamente en lugar de escribir String, Array, Map, etc.
+*Fuente: ChatGPT
+
+Los tipos de constrains que acepta mongoose son los siguientes:
+    required: Indica que un campo es obligatorio y no puede tener un valor nulo o indefinido.
+    unique: Asegura que no haya valores duplicados en el campo.
+    min y max: Establecen valores mínimos y máximos para campos numéricos.
+    enum: Limita los valores de un campo a una lista predefinida de opciones.
+    match: Utiliza una expresión regular para validar el formato de un campo de tipo String.
+    validate: Permite definir funciones de validación personalizadas para campos.
+    maxlength y minlength: Restricciones en la longitud de un campo de tipo String.
+    validateSync() y validate(): Métodos que te permiten realizar validaciones personalizadas en el documento antes de guardarlo en la base de datos.
+*Fuente: ChatGPT
+

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lista de usuarios</title>
+        <link rel="stylesheet" href="/styles/home.css"> 
+    </head>
+    <body>
+        <h1>Lista de usuarios.</h1>
+        <hr>
+        <table class="listaActualizada">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Acciones</th>
+            </tr>
+            <% list.map( (el) =>{ %>
+                <tr>
+                    <td><%= el._id %></td>
+                    <td><%= el.name %></td>
+                    <td><%= el.surname %></td>
+                    <td><%= el.email %></td>
+                    <td><button class="eliminarBtn" value="<%= el.id%>">Eliminar</button></td>
+                </tr>
+            <% })%>
+        </table>
+        <script src="/scripts/userList.js"></script>
+    </body>
+</html>

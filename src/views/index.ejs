@@ -1,25 +1,55 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Digital House Class</title>
+        <title>Proyecto BackEnd</title>
     </head>
 
     <body>
         <% const ids = [1,2,3,4,5]%>
-        <h2>En la clase de hoy veremos el famosísimo CRUD</h2>
-        <h1>Bienvenidos!!</h1>
+        <h1>Bienvenido Lautaro Nuñez.</h1>
+        <h2>¿En qué mejoraremos este proyecto hoy?</h2>
         <hr>
-        <h3>Algunas preguntas que nos servirán como disparador:</h3>
+        <h3>Tareas Pendientes:</h3>
         <ul>
-            <li>¿Qué significa CRUD?</li>
-            <li>¿Cuáles son las principales peticiones y para que se usan?</li>
-            <li>¿Qué es Postman y para qué sirve?</li>
+            <li>Generar visual para formulario de edición de productos y usuarios</li>
+            <li>Generar visual de perfil de usuario</li>
         </ul>
-        <% ids.map( (el) => {%>
-        <a href= "/api/products/productDetail/<%= el %>">
-            <li>Ir al detalle del producto <%= el %></li>
+        <hr>
+        <h3>Mapa del proyecto:</h3>    
+        <h4>Visuales:</h4>
+        <hr>
+        <a href="/chat">
+            <p>Chat que demuestra el funcionamiento de web sockets.</p>
         </a>
-        <% })%>
-        <h2>VAMOS A PROBARLO!!!!</h2>
+        <hr>
+        <a href="/home">
+            <p>El Home, muestra una colección de productos.</p>
+        </a>
+        <hr>
+        <a href="/realTimeProducts">
+            <p>Lista de productos en tiempo real, utilizando web sockets.</p>
+        </a>
+        <p>Contiene un formulario tipo post para cargar un nuevo producto</p>
+        <hr>
+        <a href="/userForm">
+            <p>Un formulario para registrar usuarios.</p>
+        </a>
+        <hr>
+        <a href="/userList">
+            <p>Lista de usuarios registrados.</p>
+        </a>
+        <hr>
+        <h4>API:</h4>
+        <a href="/api/products">
+            <p>Lista de productos</p>
+        </a>
+        <p>Se acepta un /:id para traer un producto en particular.</p>
+        <hr>
+        <a href="/api/users">
+            <p>Lista de productos</p>
+        </a>
+        <hr>
+        <p>Productos por carrito:</p>
+        <p>Para ver los productos que tiene un determinado carrito la ruta correspondiente es /api/carts/:idDelCarrito</p>
     </body>
 </html>

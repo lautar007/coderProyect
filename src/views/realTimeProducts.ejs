@@ -16,26 +16,15 @@
             name="title"
             placeholder="Coloque el título del producto"
             />
-            <label>Descripción</label>
-            <textarea
-            placeholder="Coloque una descripción"
-            name="description"
-            ></textarea>
-            <label>Código de producto</label>
-            <input 
-            type="text"
-            name="code"
-            placeholder="Coloque un código con formato AAA-000. Recuerde que debe ser único"
-            />
             <label>Precio</label>
             <input 
-            type="text"
+            type="number"
             name="price"
             placeholder="Coloque el precio del producto"
             />
             <label>Stock</label>
             <input 
-            type="text"
+            type="number"
             name="stock"
             placeholder="Coloque el cantidad del producto"
             />
@@ -48,7 +37,7 @@
             <label>Portada</label>
             <input 
             type="text"
-            name="thumbnail"
+            name="image"
             placeholder="Coloque la URL de la portada del producto"
             />
             <button type="submit">Enviar</button>
@@ -58,8 +47,7 @@
             <tr>
                 <th>ID</th>
                 <th>Título</th>
-                <th>Descripción</th>
-                <th>Código</th>
+                <th>Categoría</th>
                 <th>Precio</th>
                 <th>Acciones</th>
             </tr>
@@ -67,8 +55,7 @@
                 <tr>
                     <td><%= el.id %></td>
                     <td><%= el.title %></td>
-                    <td><%= el.description %></td>
-                    <td><%= el.code %></td>
+                    <td><%= el.category %></td>
                     <td>$<%= el.price %></td>
                     <td><button class="eliminarBtn" value="<%= el.id%>">Eliminar</button></td>
                 </tr>

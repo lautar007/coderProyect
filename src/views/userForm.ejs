@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Formulario de usuarios</title>
+        <link rel="stylesheet" href="/styles/home.css"> 
+    </head>
+    <body>
+        <h1>Formulario de registro de usuarios</h1>
+        <form class="formulario" action="/api/users" method="POST">
+            <label>Nombre:</label>
+            <input
+            name="firstName" placeholder="Coloque su nombre"  
+            />
+            <label>Apellido:</label>
+            <input
+            name="surname" placeholder="Coloque su apellido"/>
+            <label>Email:</label>
+            <input
+            name="email" placeholder="Coloque su email"
+            />
+            <label>Imágen de perfil</label>
+            <input
+            name="profileImage" placeholder="Coloque la URL de una imágen"
+            />
+            <label>Nombre de usuario:</label>
+            <input
+            name="username" placeholder="Coloque un nombre de usuario"
+            />
+            <label>Contraseña:</label>
+            <input
+            type="password"
+            name="password"
+            />
+            <button type="submit">Enviar</button>
+        </form>
+    </body>
+</html>

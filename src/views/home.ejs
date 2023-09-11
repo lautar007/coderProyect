@@ -10,13 +10,14 @@
         <h1 id="homeTitle">Lista de productos:</h1>
         <div class="productList">
             <% list.map((el)=>{ %>
-                <div class="productCard">
-                    <h3><%= el.title %></h3>
-                    <% !el.thumbnails ? el.thumbnails = ['https://i.pinimg.com/236x/b6/04/d7/b604d7ee6d0582ee6a6e7faf1e0cf528.jpg'] : null%>
-                    <img src="<%= el.thumbnails[0] %>" alt="imagen del producto">
-                    <p><%= el.description %></p>
-                    <p>$<%= el.price %></p>
-                </div>
+                <a href="/productDetail/<%=el.id%>" style="text-decoration: none; color: black">
+                    <div class="productCard">
+                        <h3><%= el.title %></h3>
+                        <% !el.image ? el.image = ['https://i.pinimg.com/236x/b6/04/d7/b604d7ee6d0582ee6a6e7faf1e0cf528.jpg'] : null%>
+                        <img src="<%= el.image %>" alt="imagen del producto">
+                        <p>$<%= el.price %></p>
+                    </div>
+                </a>
             <% }) %>
         </div>
     </body>
